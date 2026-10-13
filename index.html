@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Café Modern — Wijnkaart</title>
+  <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="css/app.css">
+  <style id="page-size">@page { size: A4 portrait; margin: 0; }</style>
+</head>
+<body>
+  <header class="bar">
+    <div class="brand">Café Modern <span>· menu tool</span></div>
+    <nav class="tabs">
+      <button class="tab active" type="button">Wijnkaart</button>
+      <button class="tab" type="button" disabled title="Coming next">Menukaart</button>
+    </nav>
+    <div class="bar-actions">
+      <button id="btn-print" class="ghost" type="button" title="Uses the browser's print dialog — set Margins to None and Scale to 100%">Print…</button>
+      <button id="btn-pdf" class="primary" type="button">Download PDF</button>
+    </div>
+  </header>
+
+  <div class="app">
+    <aside class="side">
+      <section class="panel">
+        <h2>1 · Wines</h2>
+        <label id="drop" class="drop">
+          <input id="file" type="file" accept=".csv,.tsv,.txt,text/csv">
+          <strong>Drop a CSV here</strong>
+          <span>or click to choose a file</span>
+        </label>
+        <details class="paste">
+          <summary>…or paste from Excel / Google Sheets</summary>
+          <textarea id="paste" rows="5" placeholder="Copy the whole sheet (including the header row) and paste it here"></textarea>
+          <button id="btn-paste" type="button">Use pasted data</button>
+        </details>
+        <div class="row-btns">
+          <button id="btn-export" type="button">Download current CSV</button>
+          <button id="btn-template" type="button">Empty template</button>
+        </div>
+        <p id="source" class="muted"></p>
+      </section>
+
+      <section class="panel">
+        <h2>2 · Check</h2>
+        <div id="stats" class="stats"></div>
+        <ul id="warnings" class="warnings"></ul>
+      </section>
+
+      <section class="panel">
+        <h2>3 · Settings</h2>
+        <label class="field">Title on page 1<input id="opt-title" type="text"></label>
+        <label class="field">Footer on last page<input id="opt-footer" type="text"></label>
+        <div class="field-pair">
+          <label class="field">Page 1 starts at (pt)<input id="opt-first" type="number" step="0.5" min="40" max="600"></label>
+          <label class="field">Bottom limit (pt)<input id="opt-bottom" type="number" step="0.5" min="600" max="842"></label>
+        </div>
+        <label class="field">PDF / print layout
+          <select id="opt-print">
+            <option value="a4">A4 pages (1 – 2 – 3 – 4)</option>
+            <option value="a3">A3 sheet, folded (front 4|1, back 2|3)</option>
+          </select>
+        </label>
+        <button id="btn-reset" class="link" type="button">Reset to the original wine list</button>
+      </section>
+    </aside>
+
+    <main class="preview">
+      <div class="preview-tools">
+        <label>Zoom <input id="zoom" type="range" min="0.4" max="1.6" step="0.05" value="0.9"></label>
+        <label class="check"><input id="show-grid" type="checkbox"> show page limits</label>
+      </div>
+      <div id="pages" class="pages"></div>
+      <div id="print-root" class="print-root" aria-hidden="true"></div>
+    </main>
+  </div>
+
+  <script src="js/default-data.js"></script>
+  <script src="js/dotted-words.js"></script>
+  <script src="js/csv.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/pdf-export.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
